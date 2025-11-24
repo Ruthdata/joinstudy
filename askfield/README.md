@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Askfield.io
 
-## Getting Started
+Askfield.io is a lightweight survey platform where people can take surveys and earn rewards. This repository contains the web application and supporting documentation for building, running, and contributing to the project.
 
-First, run the development server:
+## Key features
+- Create and publish surveys with multiple question types (single choice, multiple choice, text)
+- Take surveys and track earned rewards
+- User accounts and progress tracking
+- Basic admin dashboard for survey management and reward configuration
+- REST/GraphQL API for integrations
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech stack 
+- Frontend: React / Next.js
+- Backend: Node.js / Express / Fastify or GraphQL
+- Database: MongoDB
+- Authentication: JWT / OAuth
+- Payments/rewards: Stripe or internal wallet system
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Getting started (development)
+1. Clone the repo
+    git clone <git@github.com:Ruthdata/Askfield.git>
+2. Install dependencies
+    cd askfield
+    npm install
+    or
+    yarn
+3. Create environment file (.env) with required variables:
+    - DATABASE_URL
+    - NEXT_PUBLIC_API_URL
+    - JWT_SECRET
+    - STRIPE_SECRET_KEY (optional)
+4. Run migrations / seed data (if applicable)
+5. Start dev server
+    npm run dev
+    or
+    yarn dev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration
+- Use environment variables to configure database connections, API endpoints, and third-party keys.
+- Keep secrets out of version control (use .env and .env.example).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
+- Sign up or sign in as a user to take available surveys.
+- Complete surveys to earn reward points or credits.
+- Admins can create surveys, view results, and configure reward rules.
 
-## Learn More
+## Testing
+- Add unit and integration tests using your preferred framework (Jest, React Testing Library).
+- Run tests:
+  npm test
+  or
+  yarn test
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
+- Build the production bundle:
+  npm run build
+  or
+  yarn build
+- Deploy to your hosting provider (Vercel, Netlify, Docker, or a VPS).
+- Ensure production environment variables are set and database is migrated.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contribution
+- Fork the repository, create a feature branch, and open a pull request.
+- Follow established coding standards and include tests for new functionality.
+- Keep changes small and focused; document any public API changes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Security & Privacy
+- Minimize storage of personally identifiable information.
+- Secure API endpoints and protect reward flows against abuse.
+- Rate-limit survey submissions and verify identities where required.
 
-## Deploy on Vercel
+## License
+MIT — see LICENSE file for details.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+For questions or support, open an issue or contact the maintainers via the project repository.
