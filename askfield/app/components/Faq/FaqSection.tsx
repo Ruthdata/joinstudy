@@ -3,10 +3,17 @@
 import React, { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
-const FaqSection = () => {
-  const [openIndex, setOpenIndex] = useState(0);
+interface FAQ {
+  id: number;
+  number: string;
+  title: string;
+  content: string;
+}
 
-  const faqs = [
+const FaqSection = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const faqs: FAQ[] = [
     {
       id: 1,
       number: "01/",
@@ -44,7 +51,7 @@ const FaqSection = () => {
     },
   ];
 
-  const toggleAccordion = (index) => {
+  const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
@@ -73,7 +80,7 @@ const FaqSection = () => {
                 </h3>
               </div>
 
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center transition-transform duration-300">
+              <div className="shrink-0 w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center transition-transform duration-300">
                 {openIndex === index ? (
                   <Minus className="w-5 h-5 text-white" />
                 ) : (
