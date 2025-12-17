@@ -1,6 +1,6 @@
 import Header from "./components/Home/Header";
 import AskFieldFeatures from "./components/Features/AskFieldFeatures";
-import Customers from "./components/Feedback/Customers";
+// import Customers from "./components/Feedback/Customers";
 import FaqSection from "./components/Faq/FaqSection";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <div className="">
       <Header />
       <AskFieldFeatures />
-      <Customers />
+      {/* <Customers /> */}
       <FaqSection/>
     </div>
   );
