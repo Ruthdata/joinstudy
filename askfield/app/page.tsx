@@ -1,4 +1,3 @@
-// import NavbarHome from "./components/Navbar/NavbarHome";
 import Header from "./components/Home/Header";
 import FeatureHome from "./components/Features/FeatureHome";
 import Customers from "./components/Feedback/Customers";
