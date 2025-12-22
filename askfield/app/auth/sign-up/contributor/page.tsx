@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import ContributorHome from "../../../components/Auth/SignUp/Contributor/ContributorHome";
 
 const ContributorSignUp = () => {
   return (
-    <div>ContributorSignUp</div>
-  )
-}
+    <div>
+      <ContributorHome />
+    </div>
+  );
+};
 
-export default ContributorSignUp
+export default ContributorSignUp;
