@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import Stepper from "./Stepper";
 import Image from "next/image";
+
 
 const NavigationButtons = ({ currentStep, totalSteps, onBack, onNext }) => {
   return (
