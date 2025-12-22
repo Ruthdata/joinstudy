@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <Theme>
           <NavbarHome />
-          {children}
+          <main className="pt-20">{children}</main>
           <FooterHome />
         </Theme>
       </body>
