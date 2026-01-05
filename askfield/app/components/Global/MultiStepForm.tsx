@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Stepper from "./Stepper";
 import Image from "next/image";
+import ProfileStep from "../Steps/ProfileStep";
 
 
 const NavigationButtons = ({ currentStep, totalSteps, onBack, onNext }) => {
@@ -56,8 +57,8 @@ const MultiStepForm = () => {
   // Map step numbers to components
   const stepComponents = {
     1: ProfileStep,
-    2: DemographicsStep,
-    3: LanguagesStep,
+    // 2: DemographicsStep,
+    // 3: LanguagesStep this is the end hold your 
   };
 
   // Handle form input changes
@@ -126,11 +127,13 @@ const MultiStepForm = () => {
 
           {/* Right Side - Image */}
           <div className="hidden lg:block">
-            <div className="sticky top-24 rounded-lg overflow-hidden h-[600px] bg-gray-200">
+            <div className="sticky top-24 rounded-lg overflow-hidden ">
               <Image
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=800&fit=crop"
+                src="/images/shared/magnifying-glass.svg"
                 alt="Magnifying glass over data"
-                className="w-full h-full object-cover"
+                // className="w-full h-full object-cover"
+                width={588}
+                height={8800}
               />
             </div>
           </div>
