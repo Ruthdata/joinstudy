@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import Stepper from "./Stepper";
 import Image from "next/image";
 import ProfileStep from "../Steps/ProfileStep";
-
+import Demographics from "../Steps/Demographics";
+import Languages from "../Steps/Languages";
+import Education from "../Steps/Education";
+import Profession from "../Steps/Profession";
 
 const NavigationButtons = ({ currentStep, totalSteps, onBack, onNext }) => {
   return (
@@ -49,7 +52,7 @@ const MultiStepForm = () => {
     { id: 2, label: "Demographics" },
     { id: 3, label: "Languages" },
     { id: 4, label: "Education" },
-    { id: 5, label: "Work" },
+    { id: 5, label: "Profession" },
     { id: 6, label: "Other" },
     { id: 7, label: "Confirmation" },
   ];
@@ -57,8 +60,10 @@ const MultiStepForm = () => {
   // Map step numbers to components
   const stepComponents = {
     1: ProfileStep,
-    // 2: DemographicsStep,
-    // 3: LanguagesStep this is the end hold your 
+    2: Demographics,
+    3: Languages,
+    4: Education,
+    5: Profession
   };
 
   // Handle form input changes
