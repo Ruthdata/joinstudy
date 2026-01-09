@@ -1,9 +1,10 @@
 import React from "react";
+import Company from "./Company";
 
 const ParticipantHome = () => {
   return (
     <div>
-      <h1>Participant Home</h1>
+      <Company />
     </div>
   );
 };
