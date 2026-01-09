@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="flex flex-col items-center justify-center text-center gap-2 mt-20 mb-20">
+    <div className="flex flex-col items-center justify-center text-center gap-2 mt-30 mb-20">
       <h1 className="text-6xl font-bold">
         High Quality <span className="text-brand-primary">Data,</span>
       </h1>
