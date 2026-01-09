@@ -1,4 +1,3 @@
-// lib/constants/countries.js or constants/countries.js
 
 export const COUNTRIES = [
   { code: "AF", name: "Afghanistan" },
@@ -263,6 +262,9 @@ export const LANGUAGES = [
   { value: "danish", label: "Danish" },
   { value: "finnish", label: "Finnish" },
   { value: "norwegian", label: "Norwegian" },
+    { value: "Igbo", label: "Igbo" },
+    { value: "Yoruba", label: "Igbo" },
+
   { value: "other", label: "Other" }
 ];
 
