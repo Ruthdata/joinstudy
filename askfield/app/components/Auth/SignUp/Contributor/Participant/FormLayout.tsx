@@ -17,7 +17,7 @@ const FormLayout = ({ children }) => {
           src="/images/shared/company-image.svg"
           alt="Participant"
           width={500}
-          height={250}
+          height={300}
           className="object-contain"
         />
       </div>
