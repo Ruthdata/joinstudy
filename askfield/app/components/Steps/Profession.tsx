@@ -1,4 +1,5 @@
 import React from "react";
+import { EMPLOYMENT_STATUS, YEARS_OF_EXPERIENCE, SUBJECT_AREAS, JOB_ROLES } from '../../lib/constants/countries';
 
 const Profession = ({ formData, handleChange }) => {
   return (
@@ -12,7 +13,7 @@ const Profession = ({ formData, handleChange }) => {
       </p>
 
       <div className="space-y-6">
-        {/*  */}
+        {/* Employment Status */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             What is your employment status?*
@@ -25,12 +26,11 @@ const Profession = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">Employed</option>
-              <option value="uk">Unemployed</option>
-              <option value="ca">Self-employed</option>
-              <option value="de">Retired</option>
-              <option value="fr">Student</option>
-              <option value="other">Other</option>
+              {EMPLOYMENT_STATUS.map((status) => (
+                <option key={status.value} value={status.value}>
+                  {status.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
@@ -50,7 +50,7 @@ const Profession = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Years of Experience */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             How many years of professional experience do you have related to
@@ -64,13 +64,11 @@ const Profession = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">0-1 years</option>
-              <option value="uk">2-5 years</option>
-              <option value="ca">6-10 years</option>
-              <option value="au">11-20 years</option>
-              <option value="de">21-30 years</option>
-              <option value="fr">30+ years</option>
-              <option value="other">Other</option>
+              {YEARS_OF_EXPERIENCE.map((years) => (
+                <option key={years.value} value={years.value}>
+                  {years.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
@@ -90,7 +88,7 @@ const Profession = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Work Sector */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Which of the following best describes the sector you primarily work
@@ -104,11 +102,11 @@ const Profession = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="science">Science</option>
-              <option value="mathematics">Mathematics</option>
-              <option value="engineering">Engineering</option>
-              <option value="business">Business</option>
-              <option value="arts">Arts</option>
+              {SUBJECT_AREAS.map((subject) => (
+                <option key={subject.value} value={subject.value}>
+                  {subject.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
@@ -128,11 +126,11 @@ const Profession = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Job Role */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             What specific job role do you currently hold or have held most
-            recently in your area of expertise?*{" "}
+            recently in your area of expertise?*
           </label>
           <div className="relative">
             <select
@@ -142,9 +140,11 @@ const Profession = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="science">Junior</option>
-              <option value="business">Senior</option>
-              <option value="arts">Other</option>
+              {JOB_ROLES.map((role) => (
+                <option key={role.value} value={role.value}>
+                  {role.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg

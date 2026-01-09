@@ -1,4 +1,5 @@
 import React from "react";
+import { EDUCATION_LEVELS, SUBJECT_AREAS, GRADUATION_YEARS, STUDENT_STATUS } from '../../lib/constants/countries';
 
 const Education = ({ formData, handleChange }) => {
   return (
@@ -10,11 +11,10 @@ const Education = ({ formData, handleChange }) => {
       </p>
 
       <div className="space-y-6">
-        {/*  */}
+        {/* Highest Education Level */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Which of these is the highest level of education you have completed?
-            *
+            Which of these is the highest level of education you have completed?*
           </label>
           <div className="relative">
             <select
@@ -24,12 +24,11 @@ const Education = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">Undergraduate degree (BA/BSc/other)</option>
-              <option value="uk">Graduate degree (MA/MS/MSc/other)</option>
-              <option value="ca">Doctoral degree (PhD/other)</option>
-              <option value="de">Professional degree (JD/MBA/etc.)</option>
-              <option value="fr">High school diploma or equivalent</option>
-              <option value="other">Other</option>
+              {EDUCATION_LEVELS.map((level) => (
+                <option key={level.value} value={level.value}>
+                  {level.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
@@ -49,11 +48,10 @@ const Education = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Graduation Year */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            What year did you complete your indicated highest level of
-            education?*
+            What year did you complete your indicated highest level of education?*
           </label>
           <div className="relative">
             <select
@@ -63,13 +61,11 @@ const Education = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">2020</option>
-              <option value="uk">2019</option>
-              <option value="ca">2018</option>
-              <option value="au">2017</option>
-              <option value="de">2016</option>
-              <option value="fr">2015</option>
-              <option value="other">Other</option>
+              {GRADUATION_YEARS.map((year) => (
+                <option key={year.value} value={year.value}>
+                  {year.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
@@ -89,11 +85,10 @@ const Education = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Subject Area */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            What subject area does your highest level degree most closely relate
-            to?*{" "}
+            What subject area does your highest level degree most closely relate to?*
           </label>
           <div className="relative">
             <select
@@ -103,11 +98,11 @@ const Education = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="science">Science</option>
-              <option value="mathematics">Mathematics</option>
-              <option value="engineering">Engineering</option>
-              <option value="business">Business</option>
-              <option value="arts">Arts</option>
+              {SUBJECT_AREAS.map((subject) => (
+                <option key={subject.value} value={subject.value}>
+                  {subject.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
@@ -127,7 +122,7 @@ const Education = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Student Status */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Are you a student?*
@@ -140,9 +135,11 @@ const Education = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="science">Yes</option>
-              <option value="business">No</option>
-              <option value="arts">Other</option>
+              {STUDENT_STATUS.map((status) => (
+                <option key={status.value} value={status.value}>
+                  {status.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg
