@@ -2,6 +2,7 @@ import React from "react";
 import { Text } from "@radix-ui/themes";
 import Design from "./Design";
 import PartnerHome from "../Partner/PartnerHome";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -16,10 +17,10 @@ export default function Header() {
       </Text>
       <div>
         <button className="bg-[#3E3E3E] text-white p-3 rounded-3xl w-[243px] cursor-pointer">
-          Start collecting Data
+          <Link href="/auth/sign-up/participant">Start collecting Data</Link>
         </button>
         <button className="bg-transparent border border-[#3E3E3E] text-[#3E3E3E] p-3 rounded-3xl ml-4 w-[243px] cursor-pointer">
-          Contribute and get paid
+          <Link href="/auth/sign-up/contributor">Contribute and get paid</Link>
         </button>
       </div>
       <Design />
