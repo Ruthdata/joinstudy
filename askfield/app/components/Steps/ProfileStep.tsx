@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ProfileStep = ({ formData, handleChange }) => {
   return (
     <div>
@@ -114,9 +116,26 @@ const ProfileStep = ({ formData, handleChange }) => {
           <option value="">Select specific gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="non-binary">Non-binary</option>
+          <option value="other">Other</option>
           <option value="prefer-not-to-say">Prefer not to say</option>
         </select>
+
+        {/* Conditional "Other" input field */}
+        {formData.gender === 'other' && (
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Please specify<span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="genderOther"
+              value={formData.genderOther || ''}
+              onChange={handleChange}
+              placeholder="Enter your gender"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
