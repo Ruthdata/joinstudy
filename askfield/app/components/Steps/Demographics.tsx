@@ -1,11 +1,12 @@
 import React from 'react';
+import { COUNTRIES, PLACE_OF_BIRTH, ETHNIC_GROUPS } from '../../lib/constants/countries';
 
 const Demographics = ({ formData, handleChange }) => {
   return (
     <div className="mt-8">
       <h2 className="text-3xl font-bold mb-2">Demographics</h2>
       <p className="text-gray-600 mb-8">
-        Some of these details can&apos;t be changed later, so please select carefully.
+        Some of these details can't be changed later, so please select carefully.
       </p>
 
       <div className="space-y-6">
@@ -22,13 +23,11 @@ const Demographics = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">United States</option>
-              <option value="uk">United Kingdom</option>
-              <option value="ca">Canada</option>
-              <option value="au">Australia</option>
-              <option value="de">Germany</option>
-              <option value="fr">France</option>
-              <option value="other">Other</option>
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,13 +50,11 @@ const Demographics = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">United States</option>
-              <option value="uk">United Kingdom</option>
-              <option value="ca">Canada</option>
-              <option value="au">Australia</option>
-              <option value="de">Germany</option>
-              <option value="fr">France</option>
-              <option value="other">Other</option>
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,9 +77,11 @@ const Demographics = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="urban">Urban</option>
-              <option value="suburban">Suburban</option>
-              <option value="rural">Rural</option>
+              {PLACE_OF_BIRTH.map((place) => (
+                <option key={place.value} value={place.value}>
+                  {place.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,13 +104,11 @@ const Demographics = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">United States</option>
-              <option value="uk">United Kingdom</option>
-              <option value="ca">Canada</option>
-              <option value="au">Australia</option>
-              <option value="de">Germany</option>
-              <option value="fr">France</option>
-              <option value="other">Other</option>
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,15 +131,11 @@ const Demographics = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="asian">Asian</option>
-              <option value="black">Black or African American</option>
-              <option value="hispanic">Hispanic or Latino</option>
-              <option value="white">White or Caucasian</option>
-              <option value="native">Native American or Alaska Native</option>
-              <option value="pacific">Native Hawaiian or Pacific Islander</option>
-              <option value="mixed">Two or more races</option>
-              <option value="other">Other</option>
-              <option value="prefer-not">Prefer not to say</option>
+              {ETHNIC_GROUPS.map((group) => (
+                <option key={group.value} value={group.value}>
+                  {group.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

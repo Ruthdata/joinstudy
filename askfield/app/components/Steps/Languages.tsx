@@ -1,4 +1,5 @@
 import React from 'react';
+import { LANGUAGES, DIALECTS } from '../../lib/constants/countries';
 
 const Languages = ({ formData, handleChange }) => {
   return (
@@ -9,7 +10,7 @@ const Languages = ({ formData, handleChange }) => {
       </p>
 
       <div className="space-y-6">
-        {/* Country of Residence */}
+        {/* First Language */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             What is your first language?*
@@ -22,12 +23,11 @@ const Languages = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">English</option>
-              <option value="uk">Spanish</option>
-              <option value="ca">Chinese</option>
-              <option value="de">German</option>
-              <option value="fr">French</option>
-              <option value="other">Other</option>
+              {LANGUAGES.map((language) => (
+                <option key={language.value} value={language.value}>
+                  {language.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,10 +37,10 @@ const Languages = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Fluent Languages */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Which of the following language are you fluent in*
+            Which of the following languages are you fluent in?*
           </label>
           <div className="relative">
             <select
@@ -50,13 +50,11 @@ const Languages = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="us">English</option>
-              <option value="uk">Spanish</option>
-              <option value="ca">Chinese</option>
-              <option value="au">Japanese</option>
-              <option value="de">German</option>
-              <option value="fr">French</option>
-              <option value="other">Other</option>
+              {LANGUAGES.map((language) => (
+                <option key={language.value} value={language.value}>
+                  {language.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +64,7 @@ const Languages = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        {/*  */}
+        {/* Dialects */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Which variation(s) or regional dialect(s) do you speak fluently, if any?*
@@ -79,9 +77,11 @@ const Languages = ({ formData, handleChange }) => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select or search</option>
-              <option value="urban">Urban</option>
-              <option value="suburban">Suburban</option>
-              <option value="rural">Rural</option>
+              {DIALECTS.map((dialect) => (
+                <option key={dialect.value} value={dialect.value}>
+                  {dialect.label}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,6 @@ const Languages = ({ formData, handleChange }) => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
