@@ -2,15 +2,19 @@
 
 import FormLayout from './FormLayout';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useFormContext } from '@/app/context/FormContext';
 
 export default function Company() {
-  const [email, setEmail] = useState('');
+  const { formData, updateFormData } = useFormContext();
+  const [email, setEmail] = useState(formData.email);
   const [agreed, setAgreed] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = () => {
     if (email && agreed) {
-      // Handle form submission
-      console.log({ email });
+      updateFormData({ email });
+      router.push('/auth/sign-up/participant/country'); // Next step
     }
   };
 
@@ -72,7 +76,7 @@ export default function Company() {
 
           <button
             onClick={handleSubmit}
-            className="w-full bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gray-800 text-white py-3 rounded-4xl font-medium hover:bg-gray-900 transition disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!email || !agreed}
           >
             Next
