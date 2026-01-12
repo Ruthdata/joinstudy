@@ -14,7 +14,7 @@ export default function PartnerHome() {
         />
         <Image
           src="/images/home/careton-university.svg"
-          alt="Careton University"
+          alt="Carleton University"
           width={125}
           height={45}
           className="cursor-pointer"
