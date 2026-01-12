@@ -103,7 +103,7 @@ const FooterHome = () => {
 
             {/* Copyright */}
             <div className="text-sm text-white/60 mt-8">
-              © 2024 askField. All Rights Reserved.
+              © 2025 askField. All Rights Reserved.
             </div>
           </div>
         </div>
