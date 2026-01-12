@@ -7,7 +7,6 @@ export default function Home() {
     <div className="">
       <Header />
       <AskFieldFeatures />
-      {/* <Customers /> */}
       <FaqSection/>
     </div>
   );
