@@ -44,7 +44,6 @@ export default function AskFieldFeatures() {
               <div
                 key={index}
                 className="bg-brand-gradient rounded-3xl p-8  duration-300 hover:shadow-md transition-shadow"
-                // shadow-sm
               >
                 {/* Icon */}
                 <div className="flex justify-center mb-6">
