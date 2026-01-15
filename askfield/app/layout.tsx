@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Theme } from "@radix-ui/themes";
-import NavbarHome from "./components/Navbar/NavbarHome";
-import FooterHome from "./components/Footer/FooterHome";
+// import NavbarHome from "./components/Navbar/NavbarHome";
+// import FooterHome from "./components/Footer/FooterHome";
 import { FormProvider } from './context/FormContext';
+import ConditionalLayout from './components/ConditionalLayout';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +33,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Theme>
-          <NavbarHome />
-          <FormProvider>
-            <main>{children}</main>
-          </FormProvider>
-          <FooterHome />
+          <ConditionalLayout>
+            <FormProvider>
+              <main>{children}</main>
+            </FormProvider>
+          </ConditionalLayout>
         </Theme>
       </body>
     </html>
