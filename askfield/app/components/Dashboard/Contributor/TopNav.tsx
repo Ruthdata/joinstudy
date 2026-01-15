@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function TopNav() {
   return (
     <div>
-      <div className="p-4 border-b border-gray-200">
+      <div className="border-b border-gray-200">
         <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Menu className="w-6 h-6 text-gray-600" />
@@ -49,7 +49,7 @@ export default function TopNav() {
             <button className="px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700">
               Refer a Friend
             </button>
-            
+
             <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white font-medium">
               UE
             </div>
