@@ -1,9 +1,10 @@
 import React from "react";
+import ParticipantHomeMgt from "../../components/Dashboard/Participant/ParticipantHomeMgt";
 
 export default function ParticipantDashboard() {
   return (
     <div>
-      <h1>Participant Dashboard</h1>
+      <ParticipantHomeMgt />
     </div>
   );
 }
