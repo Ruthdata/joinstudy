@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import VerifyEmailScreen from "./VerifyEmailScreen";
 
 const EyeIcon = ({ open }: { open: boolean }) => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -50,6 +51,10 @@ export default function SignUpParticipantForm() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [updates, setUpdates] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [registeredEmail, setRegisteredEmail] = useState<string | null>(null);
+
   const [form, setForm] = useState({
     firstName: "", lastName: "", email: "", password: "", confirmPassword: "",
   });
@@ -57,10 +62,71 @@ export default function SignUpParticipantForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  const handleSubmit = async () => {
+    setError("");
+
+    if (!form.firstName || !form.lastName || !form.email || !form.password) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    if (form.password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+    if (!agreed) {
+      setError("You must agree to the Participant Terms to continue.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          password: form.password,
+          role: "participant",
+          // Required by schema — collect in a later profile completion step
+          gender: "prefer-not-to-say",
+          dateOfBirth: new Date("2000-01-01").toISOString(),
+          identityDocument: "pending",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setRegisteredEmail(form.email);
+      } else {
+        setError(data.message || "Registration failed. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Swap to verification screen after successful registration
+  if (registeredEmail) {
+    return (
+      <VerifyEmailScreen
+        email={registeredEmail}
+        onChangeEmail={() => setRegisteredEmail(null)}
+      />
+    );
+  }
+
   return (
     <div className="w-full max-w-[460px] bg-white rounded-2xl shadow-[0_2px_40px_rgba(0,0,0,0.08)] px-10 py-11">
 
-      {/* Header */}
       <h1 className="font-serif text-[2.2rem] leading-tight text-gray-900 mb-3">
         Sign up as a<br />participant
       </h1>
@@ -70,51 +136,40 @@ export default function SignUpParticipantForm() {
         join. For a full list of accepted IDs.
       </p>
 
-      {/* OAuth buttons */}
       <div className="flex gap-2.5 mb-2">
         <button className="flex flex-1 items-center justify-center gap-2.5 px-5 py-3 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-gray-400 hover:shadow-sm transition-all cursor-pointer">
           <GoogleIcon /> Continue with Google
         </button>
-        <button className="flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 bg-white hover:border-gray-400 hover:shadow-sm transition-all cursor-pointer flex-shrink-0">
+        <button className="flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 bg-white hover:border-gray-400 hover:shadow-sm transition-all cursor-pointer shrink-0">
           <FacebookIcon />
         </button>
-        <button className="flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 bg-white hover:border-gray-400 hover:shadow-sm transition-all cursor-pointer flex-shrink-0">
+        <button className="flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 bg-white hover:border-gray-400 hover:shadow-sm transition-all cursor-pointer shrink-0">
           <AppleIcon />
         </button>
       </div>
 
-      {/* Divider */}
       <div className="flex items-center gap-3 my-5">
         <div className="flex-1 h-px bg-gray-200" />
         <span className="text-xs text-gray-400">Or, sign up with your email</span>
         <div className="flex-1 h-px bg-gray-200" />
       </div>
 
-      {/* Name row */}
       <div className="grid grid-cols-2 gap-3.5 mb-3.5">
         <div>
-          <label className={labelClass}>
-            Legal First Name<span className="text-red-400 ml-0.5">*</span>
-          </label>
+          <label className={labelClass}>Legal First Name<span className="text-red-400 ml-0.5">*</span></label>
           <input className={inputClass} name="firstName" placeholder="Enter first name" value={form.firstName} onChange={handleChange} />
         </div>
         <div>
-          <label className={labelClass}>
-            Legal Last Name<span className="text-red-400 ml-0.5">*</span>
-          </label>
+          <label className={labelClass}>Legal Last Name<span className="text-red-400 ml-0.5">*</span></label>
           <input className={inputClass} name="lastName" placeholder="Enter last name" value={form.lastName} onChange={handleChange} />
         </div>
       </div>
 
-      {/* Email */}
       <div className="mb-3.5">
-        <label className={labelClass}>
-          Email<span className="text-red-400 ml-0.5">*</span>
-        </label>
+        <label className={labelClass}>Email<span className="text-red-400 ml-0.5">*</span></label>
         <input className={inputClass} name="email" type="email" placeholder="Enter email" value={form.email} onChange={handleChange} />
       </div>
 
-      {/* Password */}
       <div className="mb-3.5">
         <label className={labelClass}>Password</label>
         <div className="relative">
@@ -125,7 +180,6 @@ export default function SignUpParticipantForm() {
         </div>
       </div>
 
-      {/* Confirm Password */}
       <div className="mb-3.5">
         <label className={labelClass}>Confirm Password</label>
         <div className="relative">
@@ -136,7 +190,6 @@ export default function SignUpParticipantForm() {
         </div>
       </div>
 
-      {/* Terms checkbox */}
       <div className="flex items-start gap-2.5 mb-3">
         <input type="checkbox" id="terms" checked={agreed} onChange={() => setAgreed(!agreed)}
           className="w-4 h-4 mt-0.5 flex-shrink-0 rounded border-gray-300 accent-gray-900 cursor-pointer" />
@@ -148,7 +201,6 @@ export default function SignUpParticipantForm() {
         </label>
       </div>
 
-      {/* Updates checkbox */}
       <div className="flex items-start gap-2.5 mb-3">
         <input type="checkbox" id="updates" checked={updates} onChange={() => setUpdates(!updates)}
           className="w-4 h-4 mt-0.5 flex-shrink-0 rounded border-gray-300 accent-gray-900 cursor-pointer" />
@@ -157,15 +209,21 @@ export default function SignUpParticipantForm() {
         </label>
       </div>
 
-      {/* Submit */}
-      <button className="w-full mt-2 py-3.5 bg-gray-900 text-white rounded-full text-sm font-semibold tracking-wide hover:bg-gray-700 active:scale-[0.99] transition-all cursor-pointer">
-        Sign up
+      {error && (
+        <p className="text-xs text-red-500 mb-3 bg-red-50 px-3 py-2 rounded-lg">{error}</p>
+      )}
+
+      <button
+        onClick={handleSubmit}
+        disabled={loading}
+        className="w-full mt-2 py-3.5 bg-gray-900 text-white rounded-full text-sm font-semibold tracking-wide hover:bg-gray-700 active:scale-[0.99] transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {loading ? "Creating account..." : "Sign up"}
       </button>
 
-      {/* Footer */}
       <p className="text-center mt-4 text-xs text-gray-400">
         Already registered as a participant on AskField?{" "}
-        <a href="#" className="text-red-400 font-medium hover:underline">Login</a>
+        <a href="/login" className="text-red-400 font-medium hover:underline">Login</a>
       </p>
     </div>
   );

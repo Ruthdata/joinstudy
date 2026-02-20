@@ -1,10 +1,10 @@
 import React from "react";
-import MultiStepForm from "../../../Global/MultiStepForm";
+import ContributorMgt from "./contributorMgt";
 
 const ContributorHome = () => {
   return (
     <div>
-      <MultiStepForm />
+      <ContributorMgt />
     </div>
   );
 };

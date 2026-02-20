@@ -1,10 +1,5 @@
-import React from "react";
-import ParticipantHomeMgt from "../../components/Dashboard/Participant/ParticipantHomeMgt";
+import Finance from "../../components/Dashboard/Participant/Finance";
 
 export default function ParticipantDashboard() {
-  return (
-    <div>
-      <ParticipantHomeMgt />
-    </div>
-  );
+  return <Finance />;
 }
