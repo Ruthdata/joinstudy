@@ -4,8 +4,9 @@ import "./globals.css";
 import { Theme } from "@radix-ui/themes";
 // import NavbarHome from "./components/Navbar/NavbarHome";
 // import FooterHome from "./components/Footer/FooterHome";
-import { FormProvider } from './context/FormContext';
-import ConditionalLayout from './components/ConditionalLayout';
+import { FormProvider } from "./context/FormContext";
+import ConditionalLayout from "./components/ConditionalLayout";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,13 +33,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Theme>
-          <ConditionalLayout>
-            <FormProvider>
-              <main>{children}</main>
-            </FormProvider>
-          </ConditionalLayout>
-        </Theme>
+        <GoogleOAuthProvider
+          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+        >
+          <Theme>
+            <ConditionalLayout>
+              <FormProvider>
+                <main>{children}</main>
+              </FormProvider>
+            </ConditionalLayout>
+          </Theme>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
