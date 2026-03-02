@@ -1,8 +1,17 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import AvailableSurveys from "../../Surveys/AvailableSurveys";
-import { ChevronDown, Eye, EyeOff, Wallet, Zap, TrendingUp, HelpCircle } from 'lucide-react';
+import {
+  ChevronDown,
+  Eye,
+  EyeOff,
+  Wallet,
+  Zap,
+  TrendingUp,
+  HelpCircle,
+} from "lucide-react";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
 interface StatCardProps {
   icon: React.ReactNode;
@@ -28,7 +37,9 @@ const StatCard: React.FC<StatCardProps> = ({
   return (
     <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
       <div className="flex items-start justify-between mb-4">
-        <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center`}>
+        <div
+          className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center`}
+        >
           {icon}
         </div>
         {showVisibility && (
@@ -49,9 +60,11 @@ const StatCard: React.FC<StatCardProps> = ({
       <div>
         <p className="text-gray-500 text-sm mb-2">{title}</p>
         <div className="flex items-baseline gap-2">
-          {title.includes('Balance') && <span className="text-gray-900 font-semibold text-lg">NGN</span>}
+          {title.includes("Balance") && (
+            <span className="text-gray-900 font-semibold text-lg">NGN</span>
+          )}
           <h3 className="text-gray-900 font-bold text-3xl">
-            {isVisible ? value : '••••'}
+            {isVisible ? value : "••••"}
           </h3>
         </div>
         <div className="flex items-center gap-2 mt-3">
@@ -64,11 +77,19 @@ const StatCard: React.FC<StatCardProps> = ({
 };
 
 const Finance: React.FC = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState('Last 3 days');
+  const [selectedPeriod, setSelectedPeriod] = useState("Last 3 days");
   const [isBalanceVisible, setIsBalanceVisible] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const periods = ['Last 24 hours', 'Last 3 days', 'Last 7 days', 'Last 30 days', 'All time'];
+  const { user, loading } = useCurrentUser();
+
+  const periods = [
+    "Last 24 hours",
+    "Last 3 days",
+    "Last 7 days",
+    "Last 30 days",
+    "All time",
+  ];
 
   return (
     <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -77,11 +98,12 @@ const Finance: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div className="mb-4 sm:mb-0">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome, Ugochukwu!
+              Welcome, {loading ? "..." : user?.firstName}!{" "}
             </h1>
             <div className="flex items-center gap-2">
               <p className="text-gray-600">
-                Here&apos;s a summary of all activities happening on your AskField account.
+                Here&apos;s a summary of all activities happening on your
+                AskField account.
               </p>
               <button
                 className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -109,8 +131,12 @@ const Finance: React.FC = () => {
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              <span className="text-gray-900 font-medium">{selectedPeriod}</span>
-              <ChevronDown className={`w-4 h-4 text-gray-600 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+              <span className="text-gray-900 font-medium">
+                {selectedPeriod}
+              </span>
+              <ChevronDown
+                className={`w-4 h-4 text-gray-600 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+              />
             </button>
 
             {/* Dropdown Menu */}
@@ -124,7 +150,9 @@ const Finance: React.FC = () => {
                       setIsDropdownOpen(false);
                     }}
                     className={`w-full text-left px-4 py-2.5 hover:bg-gray-50 transition-colors first:rounded-t-lg last:rounded-b-lg ${
-                      selectedPeriod === period ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
+                      selectedPeriod === period
+                        ? "bg-blue-50 text-blue-600 font-medium"
+                        : "text-gray-700"
                     }`}
                   >
                     {period}
@@ -156,8 +184,7 @@ const Finance: React.FC = () => {
           />
         </div>
       </div>
-        <AvailableSurveys />
-
+      <AvailableSurveys />
     </div>
   );
 };

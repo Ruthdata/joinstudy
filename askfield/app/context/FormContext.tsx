@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from "react";
 
 interface FormData {
   email: string;
@@ -8,6 +8,11 @@ interface FormData {
   companyName: string;
   firstName: string;
   lastName: string;
+  jobTitle: string;
+  organizationName: string;
+  organizationType: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 interface FormContextType {
@@ -19,18 +24,23 @@ interface FormContextType {
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 const initialFormData: FormData = {
-  email: '',
-  country: '',
-  companyName: '',
-  firstName: '',
-  lastName: '',
+  email: "",
+  country: "",
+  companyName: "",
+  firstName: "",
+  lastName: "",
+  jobTitle: "",
+  organizationName: "",
+  organizationType: "",
+  password: undefined,
+  confirmPassword: undefined,
 };
 
 export function FormProvider({ children }: { children: ReactNode }) {
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   const updateFormData = (data: Partial<FormData>) => {
-    setFormData(prev => ({ ...prev, ...data }));
+    setFormData((prev) => ({ ...prev, ...data }));
   };
 
   const resetForm = () => {
@@ -47,7 +57,7 @@ export function FormProvider({ children }: { children: ReactNode }) {
 export function useFormContext() {
   const context = useContext(FormContext);
   if (!context) {
-    throw new Error('useFormContext must be used within FormProvider');
+    throw new Error("useFormContext must be used within FormProvider");
   }
   return context;
 }

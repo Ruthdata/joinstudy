@@ -38,9 +38,9 @@ const NavbarHome = () => {
             </button>
           </Link>
 
-          <Link href="/auth/sign-in">
+          <Link href="/auth/login">
             <button className="px-5 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition">
-              Sign in
+              Login
             </button>
           </Link>
         </div>
@@ -73,9 +73,9 @@ const NavbarHome = () => {
             </button>
           </Link>
 
-          <Link href="/auth/sign-in" onClick={() => setOpen(false)}>
+          <Link href="/auth/login" onClick={() => setOpen(false)}>
             <button className="w-full px-4 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition">
-              Sign in
+              Login
             </button>
           </Link>
         </div>

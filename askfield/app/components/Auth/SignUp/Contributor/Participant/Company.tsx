@@ -1,9 +1,9 @@
 "use client";
 
-import FormLayout from './FormLayout';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useFormContext } from '@/app/context/FormContext';
+import FormLayout from "./FormLayout";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useFormContext } from "@/app/context/FormContext";
 
 export default function Company() {
   const { formData, updateFormData } = useFormContext();
@@ -14,12 +14,12 @@ export default function Company() {
   const handleSubmit = () => {
     if (email && agreed) {
       updateFormData({ email });
-      router.push('/auth/sign-up/participant/country'); // Next step
+      router.push("/auth/sign-up/participant/country"); // Next step
     }
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && email && agreed) {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && email && agreed) {
       handleSubmit();
     }
   };
@@ -50,7 +50,8 @@ export default function Company() {
           </div>
 
           <p className="text-sm text-gray-600 mb-4">
-            We&apos;ll occasionally send you emails and messages about how to use AskField, as well as new features and offers.
+            We&apos;ll occasionally send you emails and messages about how to
+            use AskField, as well as new features and offers.
           </p>
 
           <div className="flex items-start mb-6">
@@ -62,11 +63,11 @@ export default function Company() {
               className="mt-1 mr-2 w-4 h-4 text-amber-500 border-gray-300 rounded focus:ring-amber-500"
             />
             <label htmlFor="terms" className="text-sm text-gray-600">
-              I agree to AskField{' '}
+              I agree to AskField{" "}
               <span className="text-amber-500 hover:text-amber-600 font-medium cursor-pointer">
                 Research Terms
-              </span>{' '}
-              and have read and understood the{' '}
+              </span>{" "}
+              and have read and understood the{" "}
               <span className="text-amber-500 hover:text-amber-600 font-medium cursor-pointer">
                 Privacy Policy
               </span>

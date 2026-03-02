@@ -7,8 +7,7 @@ import Image from "next/image";
 const InitialRegistration = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState(null);
-  
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -27,10 +26,12 @@ const InitialRegistration = () => {
 
   const [uploadedFiles, setUploadedFiles] = useState({
     identity: null,
-    supporting: null
+    supporting: null,
   });
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -38,14 +39,17 @@ const InitialRegistration = () => {
     }));
   };
 
-  const handleFileUpload = async (e, type) => {
-    const file = e.target.files[0];
+  const handleFileUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: "identity" | "supporting",
+  ) => {
+    const file = e.target.files?.[0];
     if (!file) return;
 
     // Here you would upload to your server/cloud storage
     const formDataFile = new FormData();
-    formDataFile.append('file', file);
-    
+    formDataFile.append("file", file);
+
     try {
       // TODO: Replace with your actual file upload endpoint
       // const response = await fetch('/api/upload', {
@@ -53,36 +57,45 @@ const InitialRegistration = () => {
       //   body: formDataFile,
       // });
       // const data = await response.json();
-      
+
       // Mock URL for demonstration
       const mockUrl = `https://example.com/uploads/${file.name}`;
-      
-      setUploadedFiles(prev => ({
+
+      setUploadedFiles((prev) => ({
         ...prev,
-        [type]: file.name
+        [type]: file.name,
       }));
-      
+
       // Update form data
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [type === 'identity' ? 'identityDocument' : 'supportingDocument']: mockUrl
+        [type === "identity" ? "identityDocument" : "supportingDocument"]:
+          mockUrl,
       }));
     } catch (error) {
-      console.error('File upload failed:', error);
-      alert('File upload failed. Please try again.');
+      console.error("File upload failed:", error);
+      alert("File upload failed. Please try again.");
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError(null);
 
     // Validate required fields
-    if (!formData.firstName || !formData.lastName || !formData.email || 
-        !formData.password || !formData.gender || !formData.role ||
-        !formData.birthMonth || !formData.birthDay || !formData.birthYear ||
-        !formData.identityDocument) {
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.gender ||
+      !formData.role ||
+      !formData.birthMonth ||
+      !formData.birthDay ||
+      !formData.birthYear ||
+      !formData.identityDocument
+    ) {
       setSubmitError("Please fill in all required fields");
       setIsSubmitting(false);
       return;
@@ -92,10 +105,10 @@ const InitialRegistration = () => {
     const dateOfBirth = `${formData.birthYear}-${formData.birthMonth}-${formData.birthDay}`;
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/api/auth/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           firstName: formData.firstName,
@@ -103,7 +116,10 @@ const InitialRegistration = () => {
           email: formData.email,
           password: formData.password,
           phoneNumber: formData.phoneNumber || "",
-          gender: formData.gender === 'other' ? formData.genderOther : formData.gender,
+          gender:
+            formData.gender === "other"
+              ? formData.genderOther
+              : formData.gender,
           dateOfBirth: dateOfBirth,
           identityDocument: formData.identityDocument,
           supportingDocument: formData.supportingDocument || "",
@@ -115,13 +131,19 @@ const InitialRegistration = () => {
 
       if (data.success) {
         // Redirect to email verification pending page
-        router.push(`/verify-pending?email=${encodeURIComponent(formData.email)}`);
+        router.push(
+          `/verify-pending?email=${encodeURIComponent(formData.email)}`,
+        );
       } else {
-        setSubmitError(data.message || "Registration failed. Please try again.");
+        setSubmitError(
+          data.message || "Registration failed. Please try again.",
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setSubmitError("Network error. Please check your connection and try again.");
+      setSubmitError(
+        "Network error. Please check your connection and try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -135,7 +157,8 @@ const InitialRegistration = () => {
           <div className="bg-white rounded-lg shadow-sm p-8">
             <h2 className="text-4xl font-bold mb-4">Create Your Account</h2>
             <p className="text-gray-600 mb-8">
-              Please enter your information to get started. You&apos;ll complete your full profile after verifying your email.
+              Please enter your information to get started. You&apos;ll complete
+              your full profile after verifying your email.
             </p>
 
             {/* Error Message */}
@@ -300,7 +323,7 @@ const InitialRegistration = () => {
                   <option value="prefer-not-to-say">Prefer not to say</option>
                 </select>
 
-                {formData.gender === 'other' && (
+                {formData.gender === "other" && (
                   <div className="mt-4">
                     <input
                       type="text"
@@ -332,8 +355,10 @@ const InitialRegistration = () => {
                   <option value="contributor">Contributor</option>
                 </select>
                 <p className="text-sm text-gray-500 mt-2">
-                  {formData.role === 'participant' && 'Participants contribute to research studies and earn rewards.'}
-                  {formData.role === 'contributor' && 'Contributors create and manage research projects.'}
+                  {formData.role === "participant" &&
+                    "Participants contribute to research studies and earn rewards."}
+                  {formData.role === "contributor" &&
+                    "Contributors create and manage research projects."}
                 </p>
               </div>
 
@@ -343,13 +368,14 @@ const InitialRegistration = () => {
                   Identity Document<span className="text-red-500">*</span>
                 </label>
                 <p className="text-sm text-gray-500 mb-2">
-                  Upload a government-issued ID (passport, driver&apos;s license, national ID)
+                  Upload a government-issued ID (passport, driver&apos;s
+                  license, national ID)
                 </p>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => handleFileUpload(e, 'identity')}
+                    onChange={(e) => handleFileUpload(e, "identity")}
                     className="hidden"
                     id="identity-upload"
                     required
@@ -359,12 +385,16 @@ const InitialRegistration = () => {
                     className="cursor-pointer text-blue-600 hover:text-blue-700"
                   >
                     {uploadedFiles.identity ? (
-                      <span className="text-green-600">✓ {uploadedFiles.identity}</span>
+                      <span className="text-green-600">
+                        ✓ {uploadedFiles.identity}
+                      </span>
                     ) : (
                       <span>Click to upload or drag and drop</span>
                     )}
                   </label>
-                  <p className="text-xs text-gray-500 mt-2">PDF, JPG, PNG (max 10MB)</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    PDF, JPG, PNG (max 10MB)
+                  </p>
                 </div>
               </div>
 
@@ -380,7 +410,7 @@ const InitialRegistration = () => {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => handleFileUpload(e, 'supporting')}
+                    onChange={(e) => handleFileUpload(e, "supporting")}
                     className="hidden"
                     id="supporting-upload"
                   />
@@ -389,12 +419,16 @@ const InitialRegistration = () => {
                     className="cursor-pointer text-blue-600 hover:text-blue-700"
                   >
                     {uploadedFiles.supporting ? (
-                      <span className="text-green-600">✓ {uploadedFiles.supporting}</span>
+                      <span className="text-green-600">
+                        ✓ {uploadedFiles.supporting}
+                      </span>
                     ) : (
                       <span>Click to upload or drag and drop</span>
                     )}
                   </label>
-                  <p className="text-xs text-gray-500 mt-2">PDF, JPG, PNG (max 10MB)</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    PDF, JPG, PNG (max 10MB)
+                  </p>
                 </div>
               </div>
 
@@ -408,7 +442,9 @@ const InitialRegistration = () => {
               </button>
 
               <p className="text-sm text-gray-500 mt-4 text-center">
-                After creating your account, you&apos;ll receive a verification email. Once verified, you can log in and complete your detailed profile.
+                After creating your account, you&apos;ll receive a verification
+                email. Once verified, you can log in and complete your detailed
+                profile.
               </p>
             </form>
           </div>

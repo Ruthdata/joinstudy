@@ -6,19 +6,26 @@ import Image from "next/image";
 import { SETUP_STEPS } from "../../../lib/constants/setupSteps";
 
 export default function Features() {
-  const [expandedSection, setExpandedSection] = useState("verify-email");
-  const [completedSteps, setCompletedSteps] = useState({
-    "verify-email": true,
-  });
-  const [selectedOptions, setSelectedOptions] = useState({});
+  const [expandedSection, setExpandedSection] = useState<string | null>(
+    "verify-email",
+  );
+  const [completedSteps, setCompletedSteps] = useState<Record<string, boolean>>(
+    {
+      "verify-email": true,
+    },
+  );
+
+  const [selectedOptions, setSelectedOptions] = useState<
+    Record<string, string>
+  >({});
 
   // Toggle section expansion
-  const toggleSection = (sectionId) => {
+  const toggleSection = (sectionId: string) => {
     setExpandedSection(expandedSection === sectionId ? null : sectionId);
   };
 
   // Handle option selection
-  const handleOptionSelect = (stepId, option) => {
+  const handleOptionSelect = (stepId: string, option: string) => {
     setSelectedOptions((prev) => ({
       ...prev,
       [stepId]: option,
@@ -26,7 +33,7 @@ export default function Features() {
   };
 
   // Handle next button click
-  const handleNext = (stepId) => {
+  const handleNext = (stepId: string) => {
     if (!selectedOptions[stepId]) return;
 
     // Mark current step as completed
@@ -205,7 +212,7 @@ export default function Features() {
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 mb-6">
-                      {step.options.map((option) => (
+                      {(step.options ?? []).map((option) => (
                         <button
                           key={option}
                           onClick={() => handleOptionSelect(step.id, option)}

@@ -1,16 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Home, FileText, DollarSign, HelpCircle, MessageSquare } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  FileText,
+  DollarSign,
+  HelpCircle,
+  MessageSquare,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard/participant", icon: Home },
   { name: "Surveys", href: "/dashboard/participant/surveys", icon: FileText },
-  { name: "Earnings", href: "/dashboard/participant/earnings", icon: DollarSign },
-  { name: "Help & Support", href: "/dashboard/participant/support", icon: HelpCircle },
-  { name: "Messages", href: "/dashboard/participant/messages", icon: MessageSquare },
+  {
+    name: "Earnings",
+    href: "/dashboard/participant/earnings",
+    icon: DollarSign,
+  },
+  {
+    name: "Help & Support",
+    href: "/dashboard/participant/support",
+    icon: HelpCircle,
+  },
+  {
+    name: "Messages",
+    href: "/dashboard/participant/messages",
+    icon: MessageSquare,
+  },
 ];
 
 interface DashboardLayoutProps {
@@ -20,6 +41,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const { user, loading, getInitials, getFullName } = useCurrentUser();
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -78,16 +100,32 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <p className="text-sm font-medium text-gray-900">Contact Us</p>
             </div>
           </div>
-          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
       </aside>
 
       {/* Mobile sidebar */}
       {sidebarOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-gray-900/50" onClick={() => setSidebarOpen(false)}>
-          <aside className="fixed inset-y-0 left-0 w-64 bg-white" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="lg:hidden fixed inset-0 z-50 bg-gray-900/50"
+          onClick={() => setSidebarOpen(false)}
+        >
+          <aside
+            className="fixed inset-y-0 left-0 w-64 bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
               <span className="text-lg font-semibold">askField</span>
               <button onClick={() => setSidebarOpen(false)}>
@@ -105,7 +143,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     href={item.href}
                     onClick={() => setSidebarOpen(false)}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium ${
-                      isActive ? "bg-yellow-50 text-gray-900" : "text-gray-600 hover:bg-gray-50"
+                      isActive
+                        ? "bg-yellow-50 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50"
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -134,23 +174,20 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             {/* Workspace Dropdown */}
             <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
               <div className="w-5 h-5 bg-gray-300 rounded" />
-              <span className="text-sm font-medium text-gray-900">My Workspace</span>
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              <span className="text-sm font-medium text-gray-900">
+                {loading ? "Loading..." : getFullName()}
+              </span>
             </div>
 
             {/* User Avatar */}
             <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-semibold">
-              UE
+              {loading ? "..." : getInitials()}
             </div>
           </div>
         </header>
 
         {/* Page Content - THIS IS WHERE YOUR CONTENT GOES */}
-        <main className="p-6">
-          {children}
-        </main>
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );

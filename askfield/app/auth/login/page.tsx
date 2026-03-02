@@ -1,7 +1,10 @@
 import React from "react";
+import LoginForm from "@/app/components/Auth/Login/LoginForm";
 
-const Login = () => {
-  return <div>Login</div>;
-};
-
-export default Login;
+export default function LoginPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 pt-24 pb-12">
+      <LoginForm />
+    </div>
+  );
+}

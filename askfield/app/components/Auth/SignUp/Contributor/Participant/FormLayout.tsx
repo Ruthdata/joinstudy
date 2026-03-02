@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-const FormLayout = ({ children }) => {
+const FormLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-white flex">
       {/* Left Side - Form Content */}

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Theme } from "@radix-ui/themes";
-// import NavbarHome from "./components/Navbar/NavbarHome";
-// import FooterHome from "./components/Footer/FooterHome";
 import { FormProvider } from "./context/FormContext";
 import ConditionalLayout from "./components/ConditionalLayout";
 import { GoogleOAuthProvider } from "@react-oauth/google";
