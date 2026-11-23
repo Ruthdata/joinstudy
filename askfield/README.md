@@ -1,6 +1,6 @@
-# Askfield.io
+# joinstudy.io
 
-Askfield.io is a lightweight survey platform where people can take surveys and earn rewards. This repository contains the web application and supporting documentation for building, running, and contributing to the project.
+joinstudy.io is a lightweight survey platform where people can take surveys and earn rewards. This repository contains the web application and supporting documentation for building, running, and contributing to the project.
 
 ## Key features
 - Create and publish surveys with multiple question types (single choice, multiple choice, text)
